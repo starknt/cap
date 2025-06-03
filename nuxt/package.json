@@ -1,0 +1,79 @@
+{
+  "name": "@cap.js/nuxt",
+  "version": "0.0.1",
+  "description": "Integration of Cap.js into Nuxt applications. Cap is a lightweight, modern open-source CAPTCHA alternative designed using PoW.",
+  "main": "./dist/module.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "nuxt-module-build build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagorangel1/cap.git"
+  },
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "captcha",
+    "security",
+    "detection",
+    "prevention",
+    "defense",
+    "protection",
+    "anti-abuse",
+    "anti-automation",
+    "anti-bot",
+    "anti-ddos",
+    "anti-dos",
+    "anti-exploitation",
+    "anti-spam",
+    "anti-scraping",
+    "attack-mitigation",
+    "protocol",
+    "client-server",
+    "computational-puzzle",
+    "complexity",
+    "puzzle",
+    "crypto",
+    "cryptographic",
+    "algorithm",
+    "cybersecurity",
+    "ddos",
+    "hashcash",
+    "hcaptcha",
+    "captcha-alternative",
+    "verification",
+    "invisible",
+    "pow",
+    "proof-of-work",
+    "recaptcha",
+    "spam",
+    "bots",
+    "filtering",
+    "turing-test"
+  ],
+  "author": "Tiago",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tiagorangel1/cap/issues"
+  },
+  "homepage": "https://github.com/tiagorangel1/cap#readme",
+  "dependencies": {
+    "@nuxt/kit": "^3.17.4",
+    "@cap.js/server": "^1.0.15",
+    "zod": "^3.25.49"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "^1.0.1",
+    "vue-tsc": "^2.2.10"
+  }
+}
