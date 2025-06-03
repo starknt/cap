@@ -66,7 +66,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (cdn?.provider === 'local') {
       addTemplate({
-        filename: 'cap.internal.widget.mjs',
+        filename: '@cap.js/widget.mjs',
         getContents: () => {
           return `
             export const widget = '${cdn.widget}'
