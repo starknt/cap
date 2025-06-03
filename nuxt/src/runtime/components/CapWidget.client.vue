@@ -95,6 +95,13 @@ onBeforeUnmount(() => {
   widget.value.removeEventListener('reset', handleReset)
   widget.value.removeEventListener('progress', handleProgress)
 })
+
+defineExpose({
+  // @ts-expect-error - widget.value is defined
+  solve: () => widget.value?.solve(),
+  // @ts-expect-error - widget.value is defined
+  reset: () => widget.value?.reset(),
+})
 </script>
 
 <template>
