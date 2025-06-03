@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, watch, onBeforeMount, onBeforeUnmount } from 'vue'
-import { widget as widgetUrl } from '#build/cap.internal.widget.mjs'
+import { widget as widgetUrl, wasm as wasmUrl } from '#build/cap.internal.widget.mjs'
 import { useScript } from '#imports'
 
 defineOptions({
@@ -47,6 +47,8 @@ onBeforeMount(() => {
   // @ts-expect-error - window.CAP_CUSTOM_FETCH defined by cap.js/widget
     window.CAP_CUSTOM_FETCH = fetchFn
   }
+  // @ts-expect-error - window.CAP_CUSTOM_WASM_URL defined by cap.js/widget
+  window.CAP_CUSTOM_WASM_URL = wasmUrl
 })
 
 function handleSolve(event: Event) {
