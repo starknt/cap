@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, watch, onBeforeMount, onBeforeUnmount } from 'vue'
-import { widget as widgetUrl, wasm as wasmUrl } from '#build/cap.internal.widget.mjs'
+import { widget as widgetUrl, wasm as wasmUrl } from '#build/@cap.js/widget.mjs'
 import { useScript } from '#imports'
 
 defineOptions({

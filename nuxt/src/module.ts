@@ -85,7 +85,7 @@ export default defineNuxtModule<ModuleOptions>({
       const wasm = `${providerUri}${cdn?.wasm || '/@cap.js/wasm@0.0.4/browser/cap_wasm.min.js'}`
 
       addTemplate({
-        filename: 'cap.internal.widget.mjs',
+        filename: '@cap.js/widget.mjs',
         getContents: () => {
           return `
             export const widget = '${widget}'
