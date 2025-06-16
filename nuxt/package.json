@@ -12,6 +12,13 @@
       "import": "./dist/module.mjs"
     }
   },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ]
+    }
+  },
   "type": "module",
   "scripts": {
     "prepublishOnly": "nuxt-module-build build"
@@ -69,11 +76,12 @@
   "homepage": "https://github.com/tiagorangel1/cap#readme",
   "dependencies": {
     "@nuxt/kit": "^3.17.4",
-    "@cap.js/server": "^1.0.15",
-    "zod": "^3.25.49"
+    "@cap.js/server": "^1.0.16"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^1.0.1",
-    "vue-tsc": "^2.2.10"
+    "vue-tsc": "^2.2.10",
+    "nuxt": "^3.17.5",
+    "@nuxt/scripts": "^0.11.8"
   }
 }

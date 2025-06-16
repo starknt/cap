@@ -25,9 +25,9 @@ export default defineNuxtModule<ModuleOptions>({
     tokens_store_path: '.data/tokensList.json',
     cdn: {
       provider: 'jsdelivr',
-      widget: '/@cap.js/widget@0.1.12',
-      floating: '/@cap.js/widget@0.1.12/cap-floating.min.js',
-      wasm: '/@cap.js/wasm@0.0.4/browser/cap_wasm.min.js',
+      widget: '/@cap.js/widget',
+      floating: '/@cap.js/widget/cap-floating.min.js',
+      wasm: '/@cap.js/wasm/browser/cap_wasm.min.js',
     },
     endpoints: {
       challenge: '/api/challenge',
@@ -80,9 +80,9 @@ export default defineNuxtModule<ModuleOptions>({
       const providerUri = cdn?.provider === 'jsdelivr'
         ? 'https://cdn.jsdelivr.net/npm'
         : 'https://unpkg.com'
-      const widget = `${providerUri}${cdn?.widget || '/@cap.js/widget@0.1.12'}`
-      const floating = `${providerUri}${cdn?.floating || '/@cap.js/widget@0.1.12/cap-floating.min.js'}`
-      const wasm = `${providerUri}${cdn?.wasm || '/@cap.js/wasm@0.0.4/browser/cap_wasm.min.js'}`
+      const widget = `${providerUri}${cdn?.widget || '/@cap.js/widget'}`
+      const floating = `${providerUri}${cdn?.floating || '/@cap.js/widget/cap-floating.min.js'}`
+      const wasm = `${providerUri}${cdn?.wasm || '/@cap.js/wasm/browser/cap_wasm.min.js'}`
 
       addTemplate({
         filename: '@cap.js/widget.mjs',
