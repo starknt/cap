@@ -1,5 +1,6 @@
 import { Elysia, file, NotFoundError } from "elysia";
 import { staticPlugin } from "@elysiajs/static";
+import { timingSafeEqual } from "node:crypto";
 import { cors } from "@elysiajs/cors";
 import { rateLimit } from "elysia-rate-limit";
 import Cap from "@cap.js/server";
@@ -59,21 +60,25 @@ const updateCache = async () => {
 
   if (!(currentTime - lastUpdate > updateInterval)) return;
 
+  const CACHE_HOST = process.env.CACHE_HOST || "https://cdn.jsdelivr.net";
+  if (CACHE_HOST === "disable") return;
+
+  const WIDGET_VERSION = process.env.WIDGET_VERSION || "latest";
+  const WASM_VERSION = process.env.WASM_VERSION || "latest";
+
   try {
     const [widgetSource, floatingSource, wasmSource, wasmLoaderSource] =
       await Promise.all([
-        fetch("https://cdn.jsdelivr.net/npm/@cap.js/widget@latest").then((r) =>
-          r.text()
+        fetch(`${CACHE_HOST}/npm/@cap.js/widget@${WIDGET_VERSION}`).then((r) => r.text()),
+        fetch(`${CACHE_HOST}/npm/@cap.js/widget@${WIDGET_VERSION}/cap-floating.min.js`).then(
+          (r) => r.text()
         ),
-        fetch(
-          "https://cdn.jsdelivr.net/npm/@cap.js/widget/cap-floating.min.js"
-        ).then((r) => r.text()),
-        fetch(
-          "https://cdn.jsdelivr.net/npm/@cap.js/wasm/browser/cap_wasm_bg.wasm"
-        ).then((r) => r.arrayBuffer()),
-        fetch(
-          "https://cdn.jsdelivr.net/npm/@cap.js/wasm/browser/cap_wasm.min.js"
-        ).then((r) => r.text()),
+        fetch(`${CACHE_HOST}/npm/@cap.js/wasm@${WASM_VERSION}/browser/cap_wasm_bg.wasm`).then(
+          (r) => r.arrayBuffer()
+        ),
+        fetch(`${CACHE_HOST}/npm/@cap.js/wasm@${WASM_VERSION}/browser/cap_wasm.min.js`).then(
+          (r) => r.text()
+        ),
       ]);
 
     cacheConfig["lastUpdate"] = currentTime;
@@ -160,8 +165,16 @@ const auth = new Elysia({
     })
   )
   .post("/", async ({ body, cookie, set }) => {
-    if (!body?.password || body.password !== ADMIN_KEY) {
-      set.status = 401;
+    try {
+      if (
+        !body?.password ||
+        !timingSafeEqual(Buffer.from(body.password), Buffer.from(ADMIN_KEY))
+      ) {
+        set.status = 401;
+        return { success: false };
+      }
+    } catch {
+      set.status = 500;
       return { success: false };
     }
 
@@ -394,8 +407,12 @@ const assetsServer = new Elysia({ prefix: "/assets" })
   .use(
     cors({
       origin: process.env.CORS_ORIGIN || true,
+      methods: ["GET"],
     })
   )
+  .onBeforeHandle(({ set }) => {
+    set.headers["Cache-Control"] = "max-age=31536000, immutable";
+  })
   .get("/widget.js", ({ set }) => {
     set.headers["Content-Type"] = "text/javascript";
     return file(path.join(dataDir, "assets-widget.js"));

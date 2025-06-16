@@ -151,6 +151,7 @@ export default withMermaid({
     sidebar: [
       { text: "Quickstart", link: "/guide/index.md" },
       { text: "Feature comparison", link: "/guide/alternatives.md" },
+      { text: "Community libraries", link: "/guide/community.md" },
       {
         text: "Modes",
         collapsed: false,
@@ -164,10 +165,10 @@ export default withMermaid({
         text: "Libraries",
         collapsed: false,
         items: [
-          { text: "@cap.js/server", link: "/guide/server.md" },
-          { text: "@cap.js/widget", link: "/guide/widget.md" },
-          { text: "@cap.js/solver", link: "/guide/solver.md" },
-          { text: "@cap.js/cli", link: "/guide/cli.md" },
+          { text: "Server", link: "/guide/server.md" },
+          { text: "Widget", link: "/guide/widget.md" },
+          { text: "Solver", link: "/guide/solver.md" },
+          { text: "CLI", link: "/guide/cli.md" },
         ],
       },
       {

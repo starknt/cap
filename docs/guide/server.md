@@ -168,6 +168,10 @@ app.listen(3000, () => {
 
 :::
 
+::: warning    
+These example codes don't have ratelimiting for simplicity. Make sure to add proper ratelimiting to your endpoints to prevent abuse.    
+:::
+
 Then, you can verify the CAPTCHA tokens on your server by calling the `await cap.validateToken("<token>")` method. Example:
 
 ```js
@@ -209,7 +213,7 @@ You can always access or set the options of the `Cap` class by accessing or modi
 
 ```json
 {
-  "challengeCount": 18,
+  "challengeCount": 50,
   "challengeSize": 32,
   "challengeDifficulty": 4,
   "expiresMs": 600000
